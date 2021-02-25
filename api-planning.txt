@@ -1,0 +1,73 @@
+Standar api
+
+{root.api}/{version}/{grouping}/{endpoint}
+Sample :
+http://mern-api.mernblog.com/v1/auth/login
+
+
+Standar status response
+200 - OK                    -> call api success
+201 - Created               -> post success
+400 - Bad request           -> error on client side
+401 - Unauthorization       -> user not authorization to the request
+403 - Forbidden             -> User not allowed to access
+404 - Not Found             -> Request end point not found
+500 - Internal server error -> error on server side
+502 - Bad gateway           -> invalid response from another request
+
+GROUP : Authentication
+
+[1] - register
+{root.api}/{version}/auth/register
+
+req:
+{
+    "name" : "testing",
+    "email" : "test@email.com",
+    "password" : "123123"
+}
+
+res:
+{
+    "message" : "Register success",
+    "data" : {
+        "name" : "testing",
+        "email" : "test@email.com",
+        "password" : "123123"
+    }
+}
+
+err-res:
+400 -> input yang anda masukan tidak valid
+
+[2] - login
+{root.api}/{version}/auth/login
+
+GROUP : Blog
+
+[1] - create blog post
+[POST] : {root.api}/{version}/blog/post
+req:
+{
+    "title" : "title blog",
+    "image" : "image.jpg",
+    "body"  : "lorem ipsum"
+} 
+res:
+{
+    "message": "create blog post",
+    "data" : {
+        "post_id" : 1,
+        "title" : "title blog",
+        "image" : "image.jpg",
+        "body" : "lorem ipsum",
+        "created_at" : "12/06/2020",
+        "author" : {
+            "uid" : 1,
+            "name" : "test"
+        }
+    }
+}  
+[2] - get blog post
+[3] - update blog post
+[4] - delete blog post
